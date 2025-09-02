@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
-<linkrel= "stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.7/css/bootstrap.min.css">
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.7/css/bootstrap.min.css" rel= "stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.7/js/bootstrap.min.js"></script>
 <title>Tienda de mascotas</title>
@@ -16,6 +16,8 @@
     <a href="vista/mascotas.jsp">Mascota</a><br></br>
     <a href="vista/producto.jsp">Producto</a><br></br>
     <a href="vista/vacuna.jsp">Vacuna</a>
+    <a href="PDF.jsp">Descargar PDF de informacion de mascotas</a><br></br>
+    <a href="PDF.jsp">Descargar PDF de informacion de mascotas</a><br></br>
      </div>
 </body>
 </html>

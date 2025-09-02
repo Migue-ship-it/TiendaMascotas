@@ -7,6 +7,5 @@
 </head>
 <body>
 <a href = "PDFServlet" target = "_self">descargar pdf de mascotas</a>
-
 </body>
 </html>

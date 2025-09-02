@@ -4,14 +4,14 @@
 <html>
 <head>
 <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
-<linkrel = "stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.7/css/bootstrap.min.css">
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.7/css/bootstrap.min.css" rel = "stylesheet" >
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.7/js/bootstrap.min.js"></script>
 <title>informacion de la mascota</title>
 </head>
 <body>
 	<h1>Actualizacion de informacion de la mascota</h1>
-	<form action="MascotaServlet" method="get">
+	<form action="MascotaServlet?action=update" method="get">
 		<div class="container">
 			<label for="id">id de la mascota</label>
 			<input type="number" name="id" id="id" maxlength="10"><br><br/> 
