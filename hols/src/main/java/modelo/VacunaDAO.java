@@ -4,65 +4,18 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-
 import controlador.Conexion;
-
 public class VacunaDAO {
-	private int id;
-	private String nombre;
-	private int codigo;
-	private int dosis;
-	private String enfermedad;
 	static Connection conexionBD = Conexion.conectarBD();
 	PreparedStatement pst = null; //preparar la transaccion
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public String getNombre() {
-		return nombre;
-	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-	public int getCodigo() {
-		return codigo;
-	}
-	public void setCodigo(int codigo) {
-		this.codigo = codigo;
-	}
-	public int getDosis() {
-		return dosis;
-	}
-	public void setDosis(int dosis) {
-		this.dosis = dosis;
-	}
-	public String getEnfermedad() {
-		return enfermedad;
-	}
-	public void setEnfermedad(String enfermedad) {
-		this.enfermedad = enfermedad;
-	}
-	@Override
-	public String toString() {
-		return "VacunaDAO [id=" + id + ", nombre=" + nombre + ", codigo=" + codigo + ", dosis=" + dosis
-				+ ", enfermedad=" + enfermedad + "]";
-	}
-	public List<VacunaDAO> listaMascotas() {
-		List<VacunaDAO> lista = new ArrayList<VacunaDAO>();
-	     VacunaDAO m = new VacunaDAO();
+	public List<Vacuna> listaVacunas() {
+		List<Vacuna> lista = new ArrayList<Vacuna>();
 		try {
 			String script = "select * from tblvacunas";
 			pst = conexionBD.prepareStatement(script);
 			ResultSet rs = pst.executeQuery();
 			 while (rs.next()) {
-		     m.setId(rs.getInt("id"));
-		     m.setNombre(rs.getString("nombre"));
-		     m.setCodigo(rs.getInt("codigo"));
-		     m.setDosis(rs.getInt("dosis"));
-		     m.setEnfermedad(rs.getString("enfermedad"));
+			 Vacuna m = new Vacuna(rs.getInt("id"), rs.getString("nombre"), rs.getInt("codigo"), rs.getInt("dosis"), rs.getString("enfermedad"));
 		     lista.add(m);
 		        }
 		} catch (Exception e) {
@@ -70,7 +23,7 @@ public class VacunaDAO {
 		}
 		return lista;
 	}
-	public void create(VacunaDAO dao) {
+	public void create(Vacuna dao) {
 		String script = "INSERT INTO tblvacunas(nombre, codigo, dosis, enfermedad) VALUES (?, ?, ?, ?)";
 		try {
 			pst = conexionBD.prepareStatement(script);
@@ -93,25 +46,23 @@ public class VacunaDAO {
 			errorconexion.printStackTrace();
 		}
 	}
-	public void read(int idvacuna) {
-		VacunaDAO user = new VacunaDAO();
+	public Vacuna read(int idvacuna) {
+		Vacuna user = null;
 		String script = "SELECT * FROM tblvacunas where id = ?";
 		try {
 			pst = conexionBD.prepareStatement(script);
 			pst.setInt(1, idvacuna);
 			ResultSet rs = pst.executeQuery();
 			while (rs.next()) {
-				user.setNombre(rs.getString("nombre"));
-				user.setCodigo(rs.getInt("codigo"));
-				user.setDosis(rs.getInt("dosis"));
-				user.setEnfermedad(rs.getString("enfermedad"));
+				user = new Vacuna(rs.getString("nombre"), rs.getInt("codigo"), rs.getInt("dosis"), rs.getString("enfermedad"));
 			}	
 		}
 		catch (Exception errorconexion) {
 			errorconexion.printStackTrace();
 		}
+		return user;
 }
-	public void update(VacunaDAO dao) {
+	public void update(Vacuna dao) {
 		String script = "UPDATE tblvacunas set nombre = ?, codigo = ?, dosis = ?, enfermedad = ?, where id = ?";
 		try {
 			pst = conexionBD.prepareStatement(script);

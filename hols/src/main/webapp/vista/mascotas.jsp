@@ -9,7 +9,7 @@
 </head>
 <body class="container mt-5">
   <h1 class="mb-4">Agregar mascota</h1>
-  <form action="MascotaServlet?action=create" method="get">
+  <form action="${pageContext.request.contextPath}/MascotaServlet?action=create" method="post">
     <div class="my-3">
       <label for="nombre" class="form-label">Nombre de la mascota</label>
       <input type="text" class="form-control" name="nombre" id="nombre" maxlength="50" required>
@@ -30,7 +30,7 @@
       <label for="codigo" class="form-label">Código perteneciente</label>
       <input type="number" class="form-control" name="codigo" id="codigo" maxlength="10" required>
     </div>
-     <a href="MascotaServlet?action=list">Listado de mascotas</a><br><br>
+     <a href="${pageContext.request.contextPath}/MascotaServlet?action=list">Listado de mascotas</a><br><br>
     <button type="submit" class="btn btn-primary">Enviar</button>
     <button type="reset" class="btn btn-secondary">Limpiar</button>
   </form>

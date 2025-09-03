@@ -1,28 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
-<linkrel = "stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.7/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.7/js/bootstrap.min.js"></script>
-<title>Vacunas</title>
+<meta charset="UTF-8">
+<title>Vacuna</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-	<h1>Agregar vacuna</h1>
-	<form action="VacunaServlet" method="get">
-		<div class="container">
-			<label for="nombre">Nombre de la vacuna</label>
-			<input type="text" name="nombre" id="nombre" maxlength="10"><br><br/>
-			<label for="codigo">Codigo perteneciente</label>
-			<input type="number" name="codigo" id="codigo" maxlength="50"><br><br/>
-			<label for="dosis">Dosis</label> 
-			<input type="number" name="dosis" id="dosis" maxlength="10"><br><br/>
-			<label for="enfermedad">enfermedad de la mascota</label>
-			<input type="text" name="enfermedad" id="enfermedad" maxlength="50"><br><br/>
-			<input class="button" type="submit" value="Enviar">
-			<input class="button" type="reset" value="Limpiar">
-	</form>
+<body class="container mt-5">
+  <h1 class="mb-4">Agregar Vacuna</h1>
+  <form action="${pageContext.request.contextPath}/VacunaServlet?action=create" method="post">
+    <div class="my-3">
+      <label for="nombre" class="form-label">Nombre de la vacuna</label>
+      <input type="text" class="form-control" name="nombre" id="nombre" maxlength="50" required>
+    </div>
+    <div class="my-3">
+      <label for="codigo" class="form-label">codigo</label>
+      <input type="number" class="form-control" name="codigo" id="codigo" maxlength="10" required>
+    </div>
+    <div class="my-3">
+      <label for="dosis" class="form-label">dosis</label>
+       <input type="number" class="form-control" name="dosis" id="dosis" maxlength="10" required>
+    </div>
+    <div class="my-3">
+      <label for="enfermedad" class="form-label">enfermedad</label>
+       <input type="text" class="form-control" name="enfermedad" id="enfermedad" maxlength="50" required>
+    </div>
+     <a href="${pageContext.request.contextPath}/VacunaServlet?action=list">Listado de Vacunas</a><br><br>
+    <button type="submit" class="btn btn-primary">Enviar</button>
+    <button type="reset" class="btn btn-secondary">Limpiar</button>
+  </form>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
