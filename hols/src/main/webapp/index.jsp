@@ -17,8 +17,10 @@
     <a href="vista/producto.jsp">Producto</a><br></br>
     <a href="vista/vacuna.jsp">Vacuna</a>
     <a href = "PDFServlet" target = "_self">Descargar PDF de informacion de mascotas</a><br></br>
+    <a href = "indexEmail.jsp">Enviar correo electronico</a>
      </div>
 </body>
 
 </html>
+
 
