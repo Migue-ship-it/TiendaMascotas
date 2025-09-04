@@ -20,7 +20,7 @@ public class CorreoServlet extends HttpServlet {
         props.put("mail.smtp.host", "localhost"); // tu servidor SMTP
         props.put("mail.smtp.port", "587"); // puerto típico sin SSL
         Session session = Session.getInstance(props);
-        try {
+        try { //proceso de creacion y envio del mensaje
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress("miguelmartinez2864@gmail.com")); // remitente
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
@@ -33,4 +33,5 @@ public class CorreoServlet extends HttpServlet {
         }
     }
 	
+
 }
