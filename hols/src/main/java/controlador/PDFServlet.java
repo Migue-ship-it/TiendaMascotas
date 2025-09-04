@@ -22,7 +22,7 @@ public class PDFServlet extends HttpServlet {
         response.setHeader("Content-Disposition", "inline; filename=mascotas.pdf"); //se mostrara directamente el pdf llamado mascotas.pdf en una ventana
         try  { //se crea el parametro del documento pdf
 	        	Document document = new Document();
-	            PdfWriter.getInstance(document, response.getOutputStream()); // Ruta del archivo de salida
+	            PdfWriter.getInstance(document, response.getOutputStream()); //genera el PDF y lo muestra directamente al navegador 
 	            document.open();
 	    	    String sql = "SELECT nombre, tipo, genero, raza, codigo FROM tblmascota";
 	            Statement stmt = Conexion.conectarBD().createStatement(); //crea yprepara la sentencia SQL
@@ -56,3 +56,4 @@ public class PDFServlet extends HttpServlet {
 	}
 
 }
+
