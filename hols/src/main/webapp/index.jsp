@@ -16,9 +16,9 @@
     <a href="vista/mascotas.jsp">Mascota</a><br></br>
     <a href="vista/producto.jsp">Producto</a><br></br>
     <a href="vista/vacuna.jsp">Vacuna</a>
-    <a href="PDF.jsp">Descargar PDF de informacion de mascotas</a><br></br>
-
+    <a href = "PDFServlet" target = "_self">Descargar PDF de informacion de mascotas</a><br></br>
      </div>
 </body>
 
 </html>
+
