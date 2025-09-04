@@ -8,19 +8,19 @@ import modelo.Vacuna;
 import modelo.VacunaDAO;
 import java.io.IOException;
 import java.util.List;
-@WebServlet("/VacunaServlet")
+@WebServlet("/VacunaServlet") // URL de acceso al servlet
 public class VacunaServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private VacunaDAO dao;
+    private VacunaDAO dao; //objeto de la clase VacunaDAO
     public VacunaServlet() {
         super();
-        dao = new VacunaDAO();
+        dao = new VacunaDAO(); // DAO inicializado al crear el servlet
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
         String action = request.getParameter("action");
-        try {
+        try { //parámetro "action" de la URL (segun la opcion que se elija en el action "vacuna.jsp"
             if ("delete".equalsIgnoreCase(action)) {
                 int idVacuna = Integer.parseInt(request.getParameter("id"));
                 dao.delete(idVacuna);
@@ -28,7 +28,7 @@ public class VacunaServlet extends HttpServlet {
             } else if ("update".equalsIgnoreCase(action)) {
                 int idVacuna = Integer.parseInt(request.getParameter("id"));
                 Vacuna Vacuna = dao.read(idVacuna);
-                request.setAttribute("Vacunas", Vacuna);
+                request.setAttribute("Vacunas", Vacuna); // Envía el objeto a la vista
                 request.getRequestDispatcher("/vista/vacuna.jsp").forward(request, response);
             } else if ("list".equalsIgnoreCase(action)) {
                 List<Vacuna> lista = dao.listaVacunas();
@@ -38,7 +38,7 @@ public class VacunaServlet extends HttpServlet {
                 // Cargar formulario por defecto
                 request.getRequestDispatcher("/vista/vacuna.jsp").forward(request, response);
             }
-        } catch (Exception e) {
+        } catch (Exception e) { //Manejo de errores en el servlet
             throw new ServletException("Error en VacunaServlet (GET): " + e.getMessage(), e);
         }
     }
@@ -52,8 +52,8 @@ public class VacunaServlet extends HttpServlet {
                 int codigo = Integer.parseInt(request.getParameter("codigo"));
                 int dosis = Integer.parseInt(request.getParameter("dosis"));
                 String enfermedad = request.getParameter("enfermedad");
-                Vacuna Vacuna = new Vacuna(nombre, codigo, dosis, enfermedad);
-                dao.create(Vacuna);
+                Vacuna Vacuna = new Vacuna(nombre, codigo, dosis, enfermedad); 
+                dao.create(Vacuna); // guardar en el DAO la informacion asignada en el objeto
                 response.sendRedirect(request.getContextPath() + "/VacunaServlet?action=list");
             } else if ("update".equalsIgnoreCase(action)) {
                 int idVacuna = Integer.parseInt(request.getParameter("id"));
@@ -61,7 +61,7 @@ public class VacunaServlet extends HttpServlet {
                 int codigo = Integer.parseInt(request.getParameter("codigo"));
                 int dosis = Integer.parseInt(request.getParameter("dosis"));
                 String enfermedad = request.getParameter("enfermedad");
-                Vacuna Vacuna = new Vacuna(idVacuna, nombre, codigo, dosis, enfermedad);
+                Vacuna Vacuna = new Vacuna(idVacuna, nombre, codigo, dosis, enfermedad); // Crear objeto basado en un constructor de la clase Vacuna con las variables asignadas
                 dao.update(Vacuna);
                 response.sendRedirect(request.getContextPath() + "/VacunaServlet?action=list");
             }
@@ -69,4 +69,5 @@ public class VacunaServlet extends HttpServlet {
             throw new ServletException("Error en el servlet: " + e.getMessage());
         }
     }
+
 }
