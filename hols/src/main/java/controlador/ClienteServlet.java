@@ -8,27 +8,28 @@ import modelo.Cliente;
 import modelo.ClienteDAO;
 import java.io.IOException;
 import java.util.List;
-@WebServlet("/ClienteServlet")
+@WebServlet("/ClienteServlet") // URL de acceso al servlet
 public class ClienteServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private ClienteDAO dao;
+    private ClienteDAO dao; //objeto de la clase ClienteDAO
     public ClienteServlet() {
         super();
-        dao = new ClienteDAO();
+        dao = new ClienteDAO(); // DAO inicializado al crear el servlet
+
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
         String action = request.getParameter("action");
-        try {
+        try {  //parámetro "action" de la URL (segun la opcion que elija el cliente en 
             if ("delete".equalsIgnoreCase(action)) {
                 int idCliente = Integer.parseInt(request.getParameter("id"));
                 dao.delete(idCliente);
-                response.sendRedirect(request.getContextPath() + "/ClienteServlet?action=list");
+                response.sendRedirect(request.getContextPath() + "/ClienteServlet?action=list"); // Redirige a la lista de clientes después de borrar
             } else if ("update".equalsIgnoreCase(action)) {
                 int idCliente = Integer.parseInt(request.getParameter("id"));
                 Cliente Cliente = dao.read(idCliente);
-                request.setAttribute("Clientes", Cliente);
+                request.setAttribute("Clientes", Cliente); // Envía el objeto a la vista
                 request.getRequestDispatcher("/vista/cliente.jsp").forward(request, response);
             } else if ("list".equalsIgnoreCase(action)) {
                 List<Cliente> lista = dao.listaClientes();
@@ -38,7 +39,7 @@ public class ClienteServlet extends HttpServlet {
                 // Cargar formulario por defecto
                 request.getRequestDispatcher("/vista/cliente.jsp").forward(request, response);
             }
-        } catch (Exception e) {
+        } catch (Exception e) { //Manejo de errores en el servlet
             throw new ServletException("Error en ClienteServlet (GET): " + e.getMessage(), e);
         }
     }
@@ -55,6 +56,7 @@ public class ClienteServlet extends HttpServlet {
                 String telefono = request.getParameter("telefono");
                 String correo = request.getParameter("correo");
                 Cliente Cliente = new Cliente(cedula, nombres, apellidos, direccion, telefono, correo);
+                // guardar en el DAO la informacion asignada en el objeto
                 dao.create(Cliente);
                 response.sendRedirect(request.getContextPath() + "/ClienteServlet?action=list");
             } else if ("update".equalsIgnoreCase(action)) {
@@ -65,6 +67,7 @@ public class ClienteServlet extends HttpServlet {
                 String direccion = request.getParameter("direccion");
                 String telefono = request.getParameter("telefono");
                 String correo = request.getParameter("correo");
+                // Crear objeto basado en un constructor de la clase Cliente con las variables asignadas
                 Cliente Cliente = new Cliente(idCliente, cedula, nombres, apellidos, direccion, telefono, correo);
                 dao.update(Cliente);
                 response.sendRedirect(request.getContextPath() + "/ClienteServlet?action=list");
@@ -73,4 +76,5 @@ public class ClienteServlet extends HttpServlet {
             throw new ServletException("Error en el servlet: " + e.getMessage());
         }
     }
+
 }
