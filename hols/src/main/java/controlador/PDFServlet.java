@@ -18,16 +18,16 @@ public class PDFServlet extends HttpServlet {
         super();
     }
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("application/pdf");
-        response.setHeader("Content-Disposition", "inline; filename=mascotas.pdf");
-        try  {
+		response.setContentType("application/pdf"); // Indicar al navegador que el contenido será un archivo PDF
+        response.setHeader("Content-Disposition", "inline; filename=mascotas.pdf"); //se mostrara directamente el pdf llamado mascotas.pdf en una ventana
+        try  { //se crea el parametro del documento pdf
 	        	Document document = new Document();
 	            PdfWriter.getInstance(document, response.getOutputStream()); // Ruta del archivo de salida
 	            document.open();
 	    	    String sql = "SELECT nombre, tipo, genero, raza, codigo FROM tblmascota";
-	            Statement stmt = Conexion.conectarBD().createStatement();
-	            ResultSet rs = stmt.executeQuery(sql);
-	            document.add(new Paragraph("Lista de mascotas. " + "\n\n"));//parrafo basado en un titulo
+	            Statement stmt = Conexion.conectarBD().createStatement(); //crea yprepara la sentencia SQL
+	            ResultSet rs = stmt.executeQuery(sql); //envia los resultados asignados de la sentencia
+	            document.add(new Paragraph("Lista de mascotas. " + "\n\n"));//parrafo inicial del pdf
 		        PdfPTable table = new PdfPTable(5); //5 columnas
 	            table.addCell("Nombre");
 	            table.addCell("Tipo");
@@ -50,8 +50,9 @@ public class PDFServlet extends HttpServlet {
 			} catch (Exception e) {
 				throw new ServletException(e);
 			}
-	}
+	} // El método POST se redirige al GET, para usar ambos métodos HTTP
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
+
 }
