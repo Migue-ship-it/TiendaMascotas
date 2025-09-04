@@ -21,11 +21,11 @@ public class ClienteServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
         String action = request.getParameter("action");
-        try {  //parámetro "action" de la URL (segun la opcion que elija el cliente en 
+        try {  //parámetro "action" de la URL (segun la opcion que se elija en el action "cliente.jsp"
             if ("delete".equalsIgnoreCase(action)) {
                 int idCliente = Integer.parseInt(request.getParameter("id"));
                 dao.delete(idCliente);
-                response.sendRedirect(request.getContextPath() + "/ClienteServlet?action=list"); // Redirige a la lista de clientes después de borrar
+                response.sendRedirect(request.getContextPath() + "/ClienteServlet?action=list"); // Redirige a la lista de clientes después del action seleccionado
             } else if ("update".equalsIgnoreCase(action)) {
                 int idCliente = Integer.parseInt(request.getParameter("id"));
                 Cliente Cliente = dao.read(idCliente);
@@ -78,3 +78,4 @@ public class ClienteServlet extends HttpServlet {
     }
 
 }
+
