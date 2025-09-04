@@ -17,7 +17,8 @@
     <a href="vista/producto.jsp">Producto</a><br></br>
     <a href="vista/vacuna.jsp">Vacuna</a>
     <a href="PDF.jsp">Descargar PDF de informacion de mascotas</a><br></br>
-    <a href="PDF.jsp">Descargar PDF de informacion de mascotas</a><br></br>
+
      </div>
 </body>
+
 </html>
