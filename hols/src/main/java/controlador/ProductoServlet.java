@@ -8,10 +8,10 @@ import modelo.Producto;
 import modelo.ProductoDAO;
 import java.io.IOException;
 import java.util.List;
-@WebServlet("/ProductoServlet")
+@WebServlet("/ProductoServlet") // URL de acceso al servlet
 public class ProductoServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private ProductoDAO dao;
+    private ProductoDAO dao; //objeto de la clase ProductoDAO
     public ProductoServlet() {
         super();
         dao = new ProductoDAO();
@@ -20,15 +20,15 @@ public class ProductoServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
         String action = request.getParameter("action");
-        try {
+        try { //parámetro "action" de la URL (segun la opcion que se elija en el action "producto.jsp")
             if ("delete".equalsIgnoreCase(action)) {
                 int idProducto = Integer.parseInt(request.getParameter("id"));
                 dao.delete(idProducto);
-                response.sendRedirect(request.getContextPath() + "/ProductoServlet?action=list");
+                response.sendRedirect(request.getContextPath() + "/ProductoServlet?action=list"); // Redirige a la lista de productos después del action seleccionado
             } else if ("update".equalsIgnoreCase(action)) {
                 int idProducto = Integer.parseInt(request.getParameter("id"));
                 Producto Producto = dao.read(idProducto);
-                request.setAttribute("Productos", Producto);
+                request.setAttribute("Productos", Producto); // Envía el objeto a la vista
                 request.getRequestDispatcher("/vista/producto.jsp").forward(request, response);
             } else if ("list".equalsIgnoreCase(action)) {
                 List<Producto> lista = dao.listaProductos();
@@ -38,7 +38,7 @@ public class ProductoServlet extends HttpServlet {
                 // Cargar formulario por defecto
                 request.getRequestDispatcher("/vista/producto.jsp").forward(request, response);
             }
-        } catch (Exception e) {
+        } catch (Exception e) { //Manejo de errores en el servlet
             throw new ServletException("Error en ProductoServlet (GET): " + e.getMessage(), e);
         }
     }
@@ -52,7 +52,7 @@ public class ProductoServlet extends HttpServlet {
                 String nombres = request.getParameter("nombre");
                 String marca = request.getParameter("marca");
                 String $ = request.getParameter("precio");
-                Producto Producto = new Producto(codigodebarras, nombres, marca, $);
+                Producto Producto = new Producto(codigodebarras, nombres, marca, $); // guardar en el DAO la informacion asignada en el objeto
                 dao.create(Producto);
                 response.sendRedirect(request.getContextPath() + "/ProductoServlet?action=list");
             } else if ("update".equalsIgnoreCase(action)) {
@@ -61,7 +61,7 @@ public class ProductoServlet extends HttpServlet {
                 String nombres = request.getParameter("nombre");
                 String marca = request.getParameter("marca");
                 String $ = request.getParameter("precio");
-                Producto Producto = new Producto(idProducto, codigodebarras, nombres, marca, $);
+                Producto Producto = new Producto(idProducto, codigodebarras, nombres, marca, $); // Crear objeto basado en un constructor de la clase Producto con las variables asignadas
                 dao.update(Producto);
                 response.sendRedirect(request.getContextPath() + "/ProductoServlet?action=list");
             }
@@ -69,4 +69,5 @@ public class ProductoServlet extends HttpServlet {
             throw new ServletException("Error en el servlet: " + e.getMessage());
         }
     }
+
 }
