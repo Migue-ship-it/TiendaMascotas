@@ -8,23 +8,23 @@ import modelo.Mascota;
 import modelo.MascotaDAO;
 import java.io.IOException;
 import java.util.List;
-@WebServlet("/MascotaServlet")
+@WebServlet("/MascotaServlet") // URL de acceso al servlet
 public class MascotaServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private MascotaDAO dao;
+    private MascotaDAO dao; //objeto de la clase MascotaDAO
     public MascotaServlet() {
         super();
-        dao = new MascotaDAO();
+        dao = new MascotaDAO(); // DAO inicializado al crear el servlet
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
         String action = request.getParameter("action");
-        try {
+        try { //parámetro "action" de la URL (segun la opcion que se elija en el action "mascota.jsp"
             if ("delete".equalsIgnoreCase(action)) {
                 int idmascota = Integer.parseInt(request.getParameter("id"));
                 dao.delete(idmascota);
-                response.sendRedirect(request.getContextPath() + "/MascotaServlet?action=list");
+                response.sendRedirect(request.getContextPath() + "/MascotaServlet?action=list"); // Redirige a la lista de clientes después del action seleccionado
             } else if ("update".equalsIgnoreCase(action)) {
                 int idmascota = Integer.parseInt(request.getParameter("id"));
                 Mascota mascota = dao.read(idmascota);
@@ -38,7 +38,7 @@ public class MascotaServlet extends HttpServlet {
                 // Cargar formulario por defecto
                 request.getRequestDispatcher("/vista/mascota.jsp").forward(request, response);
             }
-        } catch (Exception e) {
+        } catch (Exception e) { //Manejo de errores en el servlet
             throw new ServletException("Error en el servlet (parametros en el url): " + e.getMessage(), e);
         }
     }
@@ -53,7 +53,7 @@ public class MascotaServlet extends HttpServlet {
                 String genero = request.getParameter("genero");
                 String raza = request.getParameter("raza");
                 int codigo = Integer.parseInt(request.getParameter("codigo"));
-                Mascota mascota = new Mascota(nombre, tipo, genero, raza, codigo);
+                Mascota mascota = new Mascota(nombre, tipo, genero, raza, codigo); //guardar en el DAO la informacion asignada en el objeto
                 dao.create(mascota);
                 response.sendRedirect(request.getContextPath() + "/MascotaServlet?action=list");
             } else if ("update".equalsIgnoreCase(action)) {
@@ -63,7 +63,7 @@ public class MascotaServlet extends HttpServlet {
                 String genero = request.getParameter("genero");
                 String raza = request.getParameter("raza");
                 int codigo = Integer.parseInt(request.getParameter("codigo"));
-                Mascota mascota = new Mascota(idmascota, nombre, tipo, genero, raza, codigo);
+                Mascota mascota = new Mascota(idmascota, nombre, tipo, genero, raza, codigo); // Crear objeto basado en un constructor de la clase Mascota con las variables asignadas
                 dao.update(mascota);
                 response.sendRedirect(request.getContextPath() + "/MascotaServlet?action=list");
             }
@@ -71,4 +71,5 @@ public class MascotaServlet extends HttpServlet {
             throw new ServletException("Error en el servlet: " + e.getMessage());
         }
     }
+
 }
