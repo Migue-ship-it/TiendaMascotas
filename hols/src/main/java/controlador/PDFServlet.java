@@ -25,7 +25,7 @@ public class PDFServlet extends HttpServlet {
 	            PdfWriter.getInstance(document, response.getOutputStream()); //genera el PDF y lo muestra directamente al navegador 
 	            document.open();
 	    	    String sql = "SELECT nombre, tipo, genero, raza, codigo FROM tblmascota";
-	            Statement stmt = Conexion.conectarBD().createStatement(); //crea yprepara la sentencia SQL
+	            Statement stmt = Conexion.conectarBD().createStatement(); //crea y prepara la sentencia SQL usando el metodo createstatement
 	            ResultSet rs = stmt.executeQuery(sql); //envia los resultados asignados de la sentencia
 	            document.add(new Paragraph("Lista de mascotas. " + "\n\n"));//parrafo inicial del pdf
 		        PdfPTable table = new PdfPTable(5); //5 columnas
@@ -56,4 +56,5 @@ public class PDFServlet extends HttpServlet {
 	}
 
 }
+
 
