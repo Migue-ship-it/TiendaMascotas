@@ -20,7 +20,7 @@ public class MascotaServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
         String action = request.getParameter("action");
-        try { //parámetro "action" de la URL (segun la opcion que se elija en el action "mascota.jsp"
+        try { //parámetro "action" de la URL (segun la opcion que se elija en el action "mascotas.jsp"
             if ("delete".equalsIgnoreCase(action)) {
                 int idmascota = Integer.parseInt(request.getParameter("id"));
                 dao.delete(idmascota);
@@ -36,7 +36,7 @@ public class MascotaServlet extends HttpServlet {
                 request.getRequestDispatcher("/vista/listaMascotas.jsp").forward(request, response);
             } else {
                 // Cargar formulario por defecto
-                request.getRequestDispatcher("/vista/mascota.jsp").forward(request, response);
+                request.getRequestDispatcher("/vista/mascotas.jsp").forward(request, response);
             }
         } catch (Exception e) { //Manejo de errores en el servlet
             throw new ServletException("Error en el servlet (parametros en el url): " + e.getMessage(), e);
@@ -73,3 +73,4 @@ public class MascotaServlet extends HttpServlet {
     }
 
 }
+
