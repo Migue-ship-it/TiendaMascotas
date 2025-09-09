@@ -26,7 +26,7 @@
             </thead>
             <tbody>
                 <%
-                    List<Cliente> lista = (List<Cliente>) request.getAttribute("listaclientes");
+                    List<Cliente> lista = (List<Cliente>) request.getAttribute("listaClientes");
                 if (lista != null && !lista.isEmpty()) {
                         for (Cliente manpulacionDatos : lista) {
                 %>
@@ -54,3 +54,4 @@
     </div>
 </body>
 </html>
+
