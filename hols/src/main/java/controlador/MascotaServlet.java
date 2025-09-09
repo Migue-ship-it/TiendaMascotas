@@ -31,7 +31,7 @@ public class MascotaServlet extends HttpServlet {
                 request.setAttribute("mascotas", mascota);
                 request.getRequestDispatcher("/vista/mascotas.jsp").forward(request, response);
             } else if ("list".equalsIgnoreCase(action)) {
-                List<Mascota> lista = dao.listaMascotas();
+                List<Mascota> lista = dao.listaMascotas(); //metodo de la clase MascotaDAO
                 request.setAttribute("listaMascotas", lista);
                 request.getRequestDispatcher("/vista/listaMascotas.jsp").forward(request, response);
             } else {
@@ -73,4 +73,5 @@ public class MascotaServlet extends HttpServlet {
     }
 
 }
+
 
