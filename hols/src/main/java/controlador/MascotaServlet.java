@@ -25,11 +25,11 @@ public class MascotaServlet extends HttpServlet {
                 int idmascota = Integer.parseInt(request.getParameter("id"));
                 dao.delete(idmascota);
                 response.sendRedirect(request.getContextPath() + "/MascotaServlet?action=list"); // Redirige a la lista de clientes después del action seleccionado
-            } else if ("update".equalsIgnoreCase(action)) {
+            } else if ("read".equalsIgnoreCase(action)) {
                 int idmascota = Integer.parseInt(request.getParameter("id"));
                 Mascota mascota = dao.read(idmascota);
                 request.setAttribute("mascotas", mascota);
-                request.getRequestDispatcher("/vista/mascotas.jsp").forward(request, response);
+                response.sendRedirect(request.getContextPath() + "/MascotaServlet?action=read");
             } else if ("list".equalsIgnoreCase(action)) {
                 List<Mascota> lista = dao.listaMascotas(); //metodo de la clase MascotaDAO
                 request.setAttribute("listaMascotas", lista);
@@ -73,5 +73,6 @@ public class MascotaServlet extends HttpServlet {
     }
 
 }
+
 
 
