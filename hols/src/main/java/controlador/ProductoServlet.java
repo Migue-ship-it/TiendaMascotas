@@ -29,7 +29,7 @@ public class ProductoServlet extends HttpServlet {
                 int idProducto = Integer.parseInt(request.getParameter("id"));
                 Producto Producto = dao.read(idProducto);
                 request.setAttribute("Productos", Producto); // Envía el objeto a la vista
-                response.sendRedirect(request.getContextPath() + "/VacunaServlet?action=read");
+                response.sendRedirect(request.getContextPath() + "/ProductoServlet?action=read");
             } else if ("list".equalsIgnoreCase(action)) {
                 List<Producto> lista = dao.listaProductos();
                 request.setAttribute("listaProductos", lista);
@@ -71,4 +71,5 @@ public class ProductoServlet extends HttpServlet {
     }
 
 }
+
 
