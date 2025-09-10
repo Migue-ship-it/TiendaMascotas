@@ -16,7 +16,7 @@ public class CorreoServlet extends HttpServlet {
 En las lineas 23-25, se usa la clase Properties para asignar la configuración SMTP (servidor local sin autenticación de 2 pasos ni contraseñas de aplicacion)
 y un puerto SMTP sin SSL (protocolo de seguridad, evitando asi la autenticacion de 2 pasos, o contraseñas de aplicacion), luego en la linea 26, 
 se inicializa un Session objeto de la API JavaMail utilizando los parámetros de configuración proporcionados en el props para enviar o recibir correos electrónicos.
-Se asigna un try/catch para el proceso de creacion y envio del mensaje del remitente (linea 29) */
+Se asigna un try/catch para el proceso de creacion y envio del mensaje del remitente */
         String to = request.getParameter("to");
         String subject = request.getParameter("subject");
         String messageText = request.getParameter("message");
@@ -32,7 +32,7 @@ Se asigna un try/catch para el proceso de creacion y envio del mensaje del remit
             message.setText(messageText);
             Transport.send(message);
             response.getWriter().println("Correo enviado correctamente.");
-        } catch (MessagingException e) {
+        } catch (MessagingException e) { //Actualmente el mensaje al ejecutar el envio del correo indica un error en los props
             throw new RuntimeException(e);
         }
     }
