@@ -25,11 +25,11 @@ public class VacunaServlet extends HttpServlet {
                 int idVacuna = Integer.parseInt(request.getParameter("id"));
                 dao.delete(idVacuna);
                 response.sendRedirect(request.getContextPath() + "/VacunaServlet?action=list");
-            } else if ("update".equalsIgnoreCase(action)) {
+            } else if ("read".equalsIgnoreCase(action)) {
                 int idVacuna = Integer.parseInt(request.getParameter("id"));
                 Vacuna Vacuna = dao.read(idVacuna);
                 request.setAttribute("Vacunas", Vacuna); // Envía el objeto a la vista
-                request.getRequestDispatcher("/vista/vacuna.jsp").forward(request, response);
+                response.sendRedirect(request.getContextPath() + "/VacunaServlet?action=read");
             } else if ("list".equalsIgnoreCase(action)) {
                 List<Vacuna> lista = dao.listaVacunas();
                 request.setAttribute("listaVacunas", lista);
@@ -71,3 +71,4 @@ public class VacunaServlet extends HttpServlet {
     }
 
 }
+
