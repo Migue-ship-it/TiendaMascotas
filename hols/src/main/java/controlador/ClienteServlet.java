@@ -28,11 +28,11 @@ edirige a la lista de clientes o cliente.jsp después del action seleccionado*/
                 int idCliente = Integer.parseInt(request.getParameter("id"));
                 dao.delete(idCliente);
                 response.sendRedirect(request.getContextPath() + "/ClienteServlet?action=list");
-            } else if ("update".equalsIgnoreCase(action)) {
+            } else if ("read".equalsIgnoreCase(action)) {
                 int idCliente = Integer.parseInt(request.getParameter("id"));
                 Cliente Cliente = dao.read(idCliente); 
                 request.setAttribute("Clientes", Cliente); //almacenar el objeto Cliente bajo la clave "Clientes" en la solicitud HTTP
-                request.getRequestDispatcher("/vista/cliente.jsp").forward(request, response); // Envía el objeto a la vista cliente
+                response.sendRedirect(request.getContextPath() + "/ClienteServlet?action=read"); // Envía el objeto a la vista cliente
             } else if ("list".equalsIgnoreCase(action)) {
                 List<Cliente> lista = dao.listaClientes();
                 request.setAttribute("listaClientes", lista); //almacenar el objeto lista bajo la clave "listaClientes" en el ámbito de la solicitud HTTP
@@ -80,3 +80,4 @@ edirige a la lista de clientes o cliente.jsp después del action seleccionado*/
         }
     }
 }
+
