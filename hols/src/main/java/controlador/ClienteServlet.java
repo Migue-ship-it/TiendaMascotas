@@ -19,25 +19,27 @@ public class ClienteServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
-                /* ara recuperar información de un servidor */
+/*Dentro de este metodo (para recuperar, borrar o mostrar información de un servidor, declara una String y le asigna el valor del parámetro recuperado,
+en caso de ser equivalente "action", en las acciones "delete" y "update", se obtiene el id del cliente, se llama al objeto dao con los metodos DAO para borrar, crear o mostrar los parametros segun el id declarado
+edirige a la lista de clientes o cliente.jsp después del action seleccionado*/
         String action = request.getParameter("action");
-        try {  //parámetro "action" de la URL (segun la opcion que se elija en el action "cliente.jsp"), en caso de ser equivalente "action"  se obtienen los parametros de las lineas 51-56
+        try {  
             if ("delete".equalsIgnoreCase(action)) {
                 int idCliente = Integer.parseInt(request.getParameter("id"));
-                dao.delete(idCliente); //Se llama al objeto dao con el metodo delete para borrar el idCliente declarado en la linea 25
-                response.sendRedirect(request.getContextPath() + "/ClienteServlet?action=list"); // Redirige a la lista de clientes después del action seleccionado
+                dao.delete(idCliente);
+                response.sendRedirect(request.getContextPath() + "/ClienteServlet?action=list");
             } else if ("update".equalsIgnoreCase(action)) {
                 int idCliente = Integer.parseInt(request.getParameter("id"));
                 Cliente Cliente = dao.read(idCliente); 
-                request.setAttribute("Clientes", Cliente); // Envía el objeto a la vista
-                request.getRequestDispatcher("/vista/cliente.jsp").forward(request, response);
+                request.setAttribute("Clientes", Cliente); //almacenar el objeto Cliente bajo la clave "Clientes" en la solicitud HTTP
+                request.getRequestDispatcher("/vista/cliente.jsp").forward(request, response); // Envía el objeto a la vista cliente
             } else if ("list".equalsIgnoreCase(action)) {
                 List<Cliente> lista = dao.listaClientes();
-                request.setAttribute("listaClientes", lista);
-                request.getRequestDispatcher("/vista/listaClientes.jsp").forward(request, response);
+                request.setAttribute("listaClientes", lista); //almacenar el objeto lista bajo la clave "listaClientes" en el ámbito de la solicitud HTTP
+                request.getRequestDispatcher("/vista/listaClientes.jsp").forward(request, response); // Envía el objeto a la vista de la listaclientes
             } else {
+                request.getRequestDispatcher("/vista/cliente.jsp").forward(request, response);                 // Cargar formulario por defecto
                 // Cargar formulario por defecto
-                request.getRequestDispatcher("/vista/cliente.jsp").forward(request, response);
             }
         } catch (Exception e) { //Manejo de errores en el servlet
             throw new ServletException("Error en ClienteServlet (GET): " + e.getMessage(), e);
