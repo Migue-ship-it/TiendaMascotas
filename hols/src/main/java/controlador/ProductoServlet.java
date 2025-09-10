@@ -25,11 +25,11 @@ public class ProductoServlet extends HttpServlet {
                 int idProducto = Integer.parseInt(request.getParameter("id"));
                 dao.delete(idProducto);
                 response.sendRedirect(request.getContextPath() + "/ProductoServlet?action=list"); // Redirige a la lista de productos después del action seleccionado
-            } else if ("update".equalsIgnoreCase(action)) {
+            } else if ("read".equalsIgnoreCase(action)) {
                 int idProducto = Integer.parseInt(request.getParameter("id"));
                 Producto Producto = dao.read(idProducto);
                 request.setAttribute("Productos", Producto); // Envía el objeto a la vista
-                request.getRequestDispatcher("/vista/producto.jsp").forward(request, response);
+                response.sendRedirect(request.getContextPath() + "/VacunaServlet?action=read");
             } else if ("list".equalsIgnoreCase(action)) {
                 List<Producto> lista = dao.listaProductos();
                 request.setAttribute("listaProductos", lista);
@@ -71,3 +71,4 @@ public class ProductoServlet extends HttpServlet {
     }
 
 }
+
