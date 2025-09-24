@@ -49,8 +49,8 @@ Este se redirige a la lista de clientes o cliente.jsp después del action selecc
     protected void doPost(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
         /*Dentro del metodo doPost (no muestra datos existentes o para crear) declara una String y le asigna el valor del parámetro recuperado, si el valor de la action es igual a la cadena "create",
-        se obtienen los parametros de las lineas 55-60 (mismo caso para la condicional con la action update en las lineas 65-71), declara un objeto llamando al constructor de la clase Cliente para guardar la informacion de los parametros
-        declara un objeto llamando al constructor de la clase Cliente para guardar la informacion de los parametros de las lineas 51-56, guardar la informacion asignada en el DAO en el objeto */
+        se obtienen los parametros de las lineas 57-62 (mismo caso para la condicional con la action update en las lineas 66-76), declara un objeto llamando al constructor de la clase Cliente para guardar la informacion de los parametros
+        declara un objeto llamando al constructor de la clase Mascota para guardar la informacion de los parametros de las lineas 67-73, guardar la informacion asignada en el DAO en el objeto */
         String action = request.getParameter("action"); 
         try { 
             if ("create".equalsIgnoreCase(action)) {
@@ -80,6 +80,7 @@ Este se redirige a la lista de clientes o cliente.jsp después del action selecc
         }
     }
 }
+
 
 
 
