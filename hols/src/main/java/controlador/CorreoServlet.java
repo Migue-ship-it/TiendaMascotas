@@ -12,6 +12,9 @@ public class CorreoServlet extends HttpServlet {
 	@Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
+		/* En este codigo se refleja el proceso para el envio y seguridad de los mensajes mediante Properties, 
+		para almacenar el servidor SMTP donde se dara la comunicacion a internet para el envio de correos. 
+		Tambien el proceso y creacion del mensaje, todo esto mediante la API JavaMail.*/
         String to = request.getParameter("to");
         String subject = request.getParameter("subject");
         String messageText = request.getParameter("message");
