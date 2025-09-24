@@ -23,7 +23,7 @@ public class ClienteServlet extends HttpServlet {
 en caso de ser equivalente "action", en las acciones "delete" y "update", se obtiene el id del cliente, se llama al objeto dao con los metodos DAO para borrar, crear o mostrar los parametros segun el id declarado
 edirige a la lista de clientes o cliente.jsp después del action seleccionado*/
         String action = request.getParameter("action");
-        try {  
+        try { //parámetro "action" de la URL (segun la opcion que se elija en el action "cliente.jsp"
             if ("delete".equalsIgnoreCase(action)) {
                 int idCliente = Integer.parseInt(request.getParameter("id"));
                 dao.delete(idCliente);
@@ -80,4 +80,5 @@ edirige a la lista de clientes o cliente.jsp después del action seleccionado*/
         }
     }
 }
+
 
