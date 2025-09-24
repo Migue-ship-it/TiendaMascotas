@@ -19,6 +19,9 @@ public class MascotaServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
+/*Dentro de este metodo (para recuperar, borrar o mostrar información de un servidor), declara una String y le asigna el valor del parámetro recuperado,
+en caso de ser equivalente "action", en las acciones "delete" y "update", se obtiene el id de la mascota, se llama al objeto dao con los metodos DAO para borrar, crear o mostrar los parametros segun el id declarado
+Este se redirige a la lista de mascotas o mascotas.jsp después del action seleccionado*/
         String action = request.getParameter("action");
         try { //parámetro "action" de la URL (segun la opcion que se elija en el action "mascotas.jsp"
             if ("delete".equalsIgnoreCase(action)) {
@@ -45,6 +48,9 @@ public class MascotaServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
+        /*Dentro del metodo doPost (no muestra datos existentes o para crear) declara una String y le asigna el valor del parámetro recuperado, si el valor de la action es igual a la cadena "create",
+        se obtienen los parametros de las lineas 57-61 (mismo caso para la condicional con la action update en las lineas 65-74), declara un objeto llamando al constructor de la clase Mascota para guardar la informacion de los parametros
+        declara un objeto llamando al constructor de la clase Mascota para guardar la informacion de los parametros de las lineas 66-71, guardar la informacion asignada en el DAO en el objeto */
         String action = request.getParameter("action");
         try {
             if ("create".equalsIgnoreCase(action)) {
@@ -73,6 +79,7 @@ public class MascotaServlet extends HttpServlet {
     }
 
 }
+
 
 
 
