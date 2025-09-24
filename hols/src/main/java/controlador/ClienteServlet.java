@@ -21,7 +21,7 @@ public class ClienteServlet extends HttpServlet {
             throws ServletException, IOException {
 /*Dentro de este metodo (para recuperar, borrar o mostrar información de un servidor, declara una String y le asigna el valor del parámetro recuperado,
 en caso de ser equivalente "action", en las acciones "delete" y "update", se obtiene el id del cliente, se llama al objeto dao con los metodos DAO para borrar, crear o mostrar los parametros segun el id declarado
-edirige a la lista de clientes o cliente.jsp después del action seleccionado*/
+Este se redirige a la lista de clientes o cliente.jsp después del action seleccionado*/
         String action = request.getParameter("action");
         try { //parámetro "action" de la URL (segun la opcion que se elija en el action "cliente.jsp"
             if ("delete".equalsIgnoreCase(action)) {
@@ -80,5 +80,6 @@ edirige a la lista de clientes o cliente.jsp después del action seleccionado*/
         }
     }
 }
+
 
 
