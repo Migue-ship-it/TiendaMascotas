@@ -29,10 +29,14 @@ public class CorreoServlet extends HttpServlet {
         });
         try { //proceso de creacion y envio del mensaje
             Message message = new MimeMessage(session);
+			message.addHeader("Content-type", "text/HTML; charset=UTF-8");
+			message.addHeader("format", "flowed");
+			message.addHeader("Content-Transfer-Encoding", "8bit");
             message.setFrom(new InternetAddress("miguelmartinez2864@gmail.com")); // remitente
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
-            message.setSubject(subject);
-            message.setText(messageText);
+            message.setSubject(subject, "UTF-8");
+            message.setText(messageText, "UTF-8");
+			message.setSentDate(new Date());
             Transport.send(message);
             response.getWriter().println("Correo enviado correctamente.");
         } catch (MessagingException e) {
